@@ -2,7 +2,7 @@ import { Dispatch, createContext, useEffect, useReducer } from "react";
 import { LogonAction, StateType } from "./types/Type";
 import axios from "axios";
 
-const initalState = { userid: "", username: "", isLogon: false, callBack: (param: boolean) => { } };
+const initalState: StateType = { userid: "", username: "", isLogon: false };
 
 //Reducer 따로 생성 
 // 리듀서 함수는 액션에 따라 상태를 업데이트하는 역할을 합니다.
@@ -17,7 +17,9 @@ function LogInReducer(state: StateType, action: LogonAction): StateType {
             }
 
         case "LOGOUT":
-            return { ...state, userid: "", username: "", isLogon: false }
+            let logOutState = { ...state, userid: "", username: "", isLogon: false };
+            saveStateToLocalStorage("appState", logOutState);
+            return logOutState
 
         case "RESET":
             return initalState;

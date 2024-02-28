@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ItemType } from "./types/Type";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { AppContext, getStateFromLocalStorage } from "./Context";
 
 const itemData: ItemType[] = [
     { userId: 2, id: 1, title: "title1" },
@@ -13,7 +14,6 @@ const itemData: ItemType[] = [
 function AlbumList() {
     const baseUrl = "https://jsonplaceholder.typicode.com/albums/";
 
-    const controller = new AbortController();
     const location = useLocation();
     let navigate = useNavigate();
     
@@ -21,15 +21,23 @@ function AlbumList() {
     const [item, setItem] = useState<ItemType>({ userId: -1, id: -1, title: "" });
 
     let uId = location.state;
+    
+    let context = useContext(AppContext);
 
     useEffect(() => {
+        const controller = new AbortController();
+        context.state = getStateFromLocalStorage("appState");//로그온한 아이디가져오고 다른 정보 불러온다 
+
         axios.get(baseUrl, { signal: controller.signal }).then((response) => {
             const filtered = response.data.filter((item: ItemType) => item.userId == uId);
-            console.log(filtered);
+
             setItems([...filtered]);
         }).catch((error) => {
             console.log(error);
         })
+        return () => {
+            controller.abort();
+        }
     }, []);
 
     const itemClick = (item: ItemType) => {
