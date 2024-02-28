@@ -29,7 +29,7 @@ function Home() {
 
                 context.dispatch({ type: "LOGON", value: { userid: userId, username: userName, isLogon: true } });
                 
-                setTimeout(() => { navigate("/albumList", { state: userId }) }, 1000);  //페이지 이동 
+                setTimeout(() => { navigate("/album", { state: userId }) }, 1000);  //페이지 이동 
                 setMsg("");
             }).catch((error) => {
                 alert("로그인에 실패했습니다.");
