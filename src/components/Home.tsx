@@ -16,15 +16,6 @@ function Home() {
         setUserId(e.target.value);
     }
 
-    let callBack = (param: boolean): void => {
-        if (param) {
-            navigate("/home", {}); // Send state to another component
-            setMsg("Login Success");
-        } else {
-            setMsg("Login Fail");
-        }
-    }
-
     const logIn = () => {
         // User ID는 1~10번만 가능합니다.
         // 위 문구를 아래 condition이 match하지 않으면 출력
@@ -36,8 +27,8 @@ function Home() {
                 const userData = response.data;
                 let userName = userData.username;
 
-                context.dispatch({ type: "LOGON", value: { userid: userId, username: userName, isLogon: true, callBack: callBack } });
-
+                context.dispatch({ type: "LOGON", value: { userid: userId, username: userName, isLogon: true } });
+                
                 setTimeout(() => { navigate("/albumList", { state: userId }) }, 1000);  //페이지 이동 
                 setMsg("");
             }).catch((error) => {
@@ -53,7 +44,7 @@ function Home() {
     }
 
     const logOut = () => {
-        context.dispatch({ type: "LOGOUT", value: { userid: "", username: "", isLogon: false, callBack: callBack } });
+        context.dispatch({ type: "LOGOUT", value: { userid: "", username: "", isLogon: false } });
     }
 
     return (
