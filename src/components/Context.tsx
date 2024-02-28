@@ -30,6 +30,7 @@ function LogInReducer(state: StateType, action: LogonAction): StateType {
                     console.error("로그인에 실패했습니다.", error);
                     // 에러 처리 또는 사용자에게 알리기
                 });
+
             // 이 경우 로그인에 대한 상태 업데이트는 비동기로 이루어집니다.
             // 따라서 리듀서 함수 안에서 직접적으로 새로운 상태를 반환하지 않고,
             // 비동기 작업이 완료된 후에 dispatch를 사용하여 새로운 상태를 전달합니다.
@@ -37,8 +38,10 @@ function LogInReducer(state: StateType, action: LogonAction): StateType {
 
         case "LOGOUT":
             return { ...state, userid: "", username: "", isLogon: false }
+
         case "RESET":
             return initalState;
+
         default:
             throw new Error("알수없는 액션입니다.");
     }
@@ -62,7 +65,6 @@ const AppProvider = ({ children }: { children: any }) => {
         </AppContext.Provider>
     )
 }
-
 
 const saveStateToLocalStorage = (key: string, state: StateType) => {
     localStorage.setItem(key, JSON.stringify(state));
