@@ -28,8 +28,11 @@ type UserType = {
     company: CompanyType
 }
 
-function Type() {
-    console.log("TYPE")
+type StateType = {
+    userid: string,
+    username: string,
+    isLogon: boolean,
+    callBack: (param: boolean) => void
 }
 
-export default Type;
+export type { UserType };
