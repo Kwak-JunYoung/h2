@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './Layout';
 import AlbumList from './components/albumList';
 import { AppProvider } from './components/Context';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <AppProvider>
         <Routes>
           <Route path='/' element={<Layout />} >
+            <Route index element={<Home />} ></Route>
             <Route path='/albumList' element={<AlbumList />} ></Route>
             <Route path='/albumList/:id' element={<AlbumList />} ></Route>
           </Route>
