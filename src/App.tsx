@@ -13,8 +13,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Layout />} >
             <Route index element={<Home />} ></Route>
-            <Route path='/albumList' element={<AlbumList />} ></Route>
-            <Route path='/albumList/:id' element={<AlbumList />} ></Route>
+            <Route path='/album' element={<AlbumList />} ></Route>
+            <Route path='/album/:id' element={<AlbumList />} ></Route>
           </Route>
         </Routes>
       </AppProvider>
