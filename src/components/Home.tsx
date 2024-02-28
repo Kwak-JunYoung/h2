@@ -9,7 +9,6 @@ function Home() {
 
     const [resTxt, setResTxt] = useState('');
 
-
     let context = useContext(AppContext);
     let navigate = useNavigate();
 

@@ -10,28 +10,11 @@ function LogInReducer(state: StateType, action: LogonAction): StateType {
 
     switch (action.type) {
         case "LOGON":
-            let url = "https://jsonplaceholder.typicode.com/users/" + action.value.userid;
-            axios.get(url)
-                .then(response => {
-                    const userData = response.data;
-                    const newState = {
-                        ...state,
-                        userid: userData.id,
-                        username: userData.name,
-                        isLogon: true
-                    };
-                    saveStateToLocalStorage("appState", newState);
-                    return newState;
-                })
-                .catch(error => {
-                    console.error("로그인에 실패했습니다.", error);
-                    // 에러 처리 또는 사용자에게 알리기
-                });
-
-            // 이 경우 로그인에 대한 상태 업데이트는 비동기로 이루어집니다.
-            // 따라서 리듀서 함수 안에서 직접적으로 새로운 상태를 반환하지 않고,
-            // 비동기 작업이 완료된 후에 dispatch를 사용하여 새로운 상태를 전달합니다.
-            return state; // 리듀서 함수는 상태를 반환해야 하므로 기본 상태를 반환합니다.
+            {
+                let newState = { ...state, userid: action.value.userid, username: action.value.username, isLogon: true };
+                saveStateToLocalStorage("appState", newState);
+                return newState;
+            }
 
         case "LOGOUT":
             return { ...state, userid: "", username: "", isLogon: false }
