@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { AppContext } from "./components/Context";
 
 function Layout() {
+    // 새로고침하면 로그인 정보가 사라지는 문제 해결
     let context = useContext(AppContext);
 
     let navigate = useNavigate();
