@@ -1,13 +1,14 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import AppContext from './Context';
+import { AppContext } from './Context';
 
 function LogOn() {
     const [userId, setUserId] = useState<string>('');
     const [msg, setMsg] = useState('');
 
     const [resTxt, setResTxt] = useState('');
+
 
     let context = useContext(AppContext);
     let navigate = useNavigate();

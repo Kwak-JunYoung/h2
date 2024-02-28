@@ -1,11 +1,8 @@
 import { Dispatch, createContext, useEffect, useReducer } from "react";
 import { LogonAction, StateType } from "./types/Type";
 import axios from "axios";
-const initalState = { userid: "", username: "", isLogon: false, callBack: (param: boolean) => { } };
 
-const AppContext = createContext<{ state: StateType, dispatch: Dispatch<LogonAction> }>({
-    state: initalState, dispatch: () => null
-});
+const initalState = { userid: "", username: "", isLogon: false, callBack: (param: boolean) => { } };
 
 //Reducer 따로 생성 
 // 리듀서 함수는 액션에 따라 상태를 업데이트하는 역할을 합니다.
@@ -66,6 +63,10 @@ const AppProvider = ({ children }: { children: any }) => {
     )
 }
 
+const AppContext = createContext<{ state: StateType, dispatch: Dispatch<LogonAction> }>({
+    state: initalState, dispatch: () => null
+});
+
 const saveStateToLocalStorage = (key: string, state: StateType) => {
     localStorage.setItem(key, JSON.stringify(state));
 }
@@ -79,4 +80,4 @@ const getStateFromLocalStorage = (key: string) => {
 }
 
 
-export default AppContext;
+export { AppContext, AppProvider, saveStateToLocalStorage, getStateFromLocalStorage};
