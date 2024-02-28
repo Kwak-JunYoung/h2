@@ -35,4 +35,9 @@ type StateType = {
     callBack: (param: boolean) => void
 }
 
+type LogonAction =
+    { type: "RESET", value: StateType } |
+    { type: "LOGON", value: StateType } |
+    { type: "LOGOUT", value: StateType };
+
 export type { UserType };
