@@ -15,7 +15,6 @@ function AlbumList() {
         })
     }, []);
 
-    alert("CALLED")
     return (
         <div>
             <h1>Album List</h1>
