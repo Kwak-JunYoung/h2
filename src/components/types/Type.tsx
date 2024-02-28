@@ -40,4 +40,4 @@ type LogonAction =
     { type: "LOGON", value: StateType } |
     { type: "LOGOUT", value: StateType };
 
-export type { UserType };
+export type { UserType, StateType, LogonAction};
