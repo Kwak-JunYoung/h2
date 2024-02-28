@@ -64,4 +64,17 @@ const AppProvider = ({ children }: { children: any }) => {
 }
 
 
+const saveStateToLocalStorage = (key: string, state: StateType) => {
+    localStorage.setItem(key, JSON.stringify(state));
+}
+
+const getStateFromLocalStorage = (key: string) => {
+    const storage = localStorage.getItem(key);
+    if (storage) {
+        return JSON.parse(storage);
+    }
+    return initalState;
+}
+
+
 export default AppContext;
