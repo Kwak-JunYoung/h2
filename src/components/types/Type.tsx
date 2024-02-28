@@ -45,4 +45,12 @@ type LogonAction =
     { type: "LOGON", value: StateType } |
     { type: "LOGOUT", value: StateType };
 
-export type { UserType, StateType, LogonAction, ItemType};
+type PhotoType = {
+    "albumId": number;
+    "id": number;
+    "title": string;
+    "url": string;
+    "thumbnailUrl": string;
+}
+
+export type { UserType, StateType, LogonAction, ItemType, PhotoType };
