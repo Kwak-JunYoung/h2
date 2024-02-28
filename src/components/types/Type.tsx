@@ -32,7 +32,12 @@ type StateType = {
     userid: string,
     username: string,
     isLogon: boolean,
-    callBack: (param: boolean) => void
+}
+
+type ItemType = {
+    userId: number;
+    id: number;
+    title: string;
 }
 
 type LogonAction =
@@ -40,4 +45,4 @@ type LogonAction =
     { type: "LOGON", value: StateType } |
     { type: "LOGOUT", value: StateType };
 
-export type { UserType, StateType, LogonAction};
+export type { UserType, StateType, LogonAction, ItemType};
