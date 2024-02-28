@@ -1,8 +1,9 @@
-import { createContext } from "react";
+import { Dispatch, createContext } from "react";
+import { LogonAction, StateType } from "./types/Type";
+const initalState = { userid: "", username: "", isLogon: false, callBack: (param: boolean) => { } };
 
-const initalState = {};
-
-
-const AppContext = {};
+const AppContext = createContext<{ state: StateType, dispatch: Dispatch<LogonAction> }>({
+    state: initalState, dispatch: () => null
+});
 
 export default AppContext;
