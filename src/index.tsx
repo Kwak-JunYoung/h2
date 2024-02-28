@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <BrowserRouter>
     <React.StrictMode>
-      <LogOn />
+      <App />
     </React.StrictMode>
   </BrowserRouter>
 );
