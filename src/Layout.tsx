@@ -16,7 +16,6 @@ function Layout() {
 
     const logOut = () => {
         context.dispatch({ type: "LOGOUT", value: { userid: "", username: "", isLogon: false } });
-        saveStateToLocalStorage("appState", { userid: "", username: "", isLogon: false });
         navigate("/", {});
     }
 
