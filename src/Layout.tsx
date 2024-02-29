@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { AppContext, saveStateToLocalStorage, getStateFromLocalStorage } from "./components/Context";
+import { AppContext, getStateFromLocalStorage } from "./components/Context";
 
 function Layout() {
     // 새로고침하면 로그인 정보가 사라지는 문제 해결
