@@ -6,6 +6,7 @@ import { PhotoType } from "./types/Type";
 function PictureList() {
     const location = useLocation();
     const albumId = location.state.id;
+    const userId = location.state.userId;
     const [thumbnails, setThumbnails] = useState<PhotoType[]>([]);
     const [albumTitle, setAlbumTitle] = useState<string>('');
 
@@ -39,7 +40,7 @@ function PictureList() {
                     })
                 }
             </ul>
-            <button onClick={() => { navigate("/album", { state: location.state.userId }) }}>돌아가기</button>
+            <button onClick={() => { navigate("/album", { state: userId }) }}>돌아가기</button>
         </div>
     )
 }
