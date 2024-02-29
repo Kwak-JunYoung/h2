@@ -1,20 +1,15 @@
 import { Dispatch, createContext, useEffect, useReducer } from "react";
 import { LogonAction, StateType } from "./types/Type";
-import axios from "axios";
-import { get } from "http";
 
 const initalState: StateType = { userid: "", username: "", isLogon: false };
 
-//Reducer 따로 생성 
 // 리듀서 함수는 액션에 따라 상태를 업데이트하는 역할을 합니다.
 function LogInReducer(state: StateType, action: LogonAction): StateType {
     switch (action.type) {
         case "LOGON":
-            {
-                let newState = { ...state, userid: action.value.userid, username: action.value.username, isLogon: true };
-                saveStateToLocalStorage("appState", newState);
-                return newState;
-            }
+            let newState = { ...state, userid: action.value.userid, username: action.value.username, isLogon: true };
+            saveStateToLocalStorage("appState", newState);
+            return newState;
 
         case "LOGOUT":
             let logOutState = { ...state, userid: "", username: "", isLogon: false };
@@ -35,11 +30,7 @@ const AppProvider = ({ children }: { children: any }) => {
 
     useEffect(() => {
         saveStateToLocalStorage("appState", state);
-        // state가 바뀔때마다 localstorage에 저장
-        // const storage = getStateFromLocalStorage("appState");
-        // dispatch({ type: "LOGON", value: storage });
-    }
-        , [state]);
+    }, [state]);
 
     return (
         <AppContext.Provider value={{ state, dispatch }}>
