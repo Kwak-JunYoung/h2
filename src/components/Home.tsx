@@ -45,7 +45,7 @@ function Home() {
     return (
         <div>
             <input type="text" name="userId" id="userId" onChange={onChange} value={userId} placeholder="User ID..." />
-            <button type="button" onClick={logIn}>Sign In</button>
+            <button type="button" onClick={logIn} className='greenBtn'>Sign In</button>
             <div id="resultText" style={{ "color": "red" }}>{resTxt}</div>
         </div>
     )

@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { AppContext, getStateFromLocalStorage } from "./components/Context";
-
+import './App.css'
 function Layout() {
     let context = useContext(AppContext);
 
@@ -21,11 +21,17 @@ function Layout() {
 
     return (
         <div>
-            <h1 style={{ "display": "inline" }}>Hanaro Album</h1>
-            {
-                <p>{context.state.userid} {context.state.username}</p>
-            }
-            <button onClick={logOut}>Logout</button>
+            <header id="App-header" className="App-header">
+                <h1 id="headerTxt">Hanaro Album</h1>
+                <div id="userStatus-container">
+                    <div id="userInfo-container">
+                        <span id="context-uid">{context.state.userid} </span>
+                        <span id="context-uname">{context.state.username} </span>
+                    </div>
+                    {context.state.userid ? (<button onClick={logOut} className="greenBtn">Sign Out</button>) : null}
+                </div>
+            </header>
+
             <Outlet />
         </div>
     );

@@ -34,15 +34,15 @@ function PictureList() {
 
     return (
         <div>
-            <p>{albumTitle}</p>
+            <h2 id="albumTitle">{albumTitle}</h2>
             <ul>
                 {
                     thumbnails.map((item: PhotoType, key: number) => {
-                        return <img src={item.thumbnailUrl} alt={item.title} key={key} />
+                        return <img src={item.thumbnailUrl} alt={item.title} key={key} className="thumbnail" />
                     })
                 }
             </ul>
-            <button onClick={() => { navigate("/album", { state: userId }) }}>돌아가기</button>
+            <button onClick={() => { navigate("/album", { state: userId }) }} className="btn btn-primary">뒤로</button>
         </div>
     )
 }

@@ -45,8 +45,8 @@ function AlbumList() {
     return (
         <div className="container mt-3" style={{ "marginTop": "30px" }}>
             <div>
-                <h1 style={{ display: "inline" }}>Album List</h1>
-                <button type='button' className='button btn-primary' onClick={btnClick}>앨범 상세보기</button>
+                <h1 id="albumList-txt">앨범 목록</h1>
+                <button type='button' className='button btn-primary greenBtn' onClick={btnClick}>앨범 상세보기</button>
             </div>
 
             <ol className='list-group list-group-flush'>
