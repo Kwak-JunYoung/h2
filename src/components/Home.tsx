@@ -22,6 +22,7 @@ function Home() {
         let url = "https://jsonplaceholder.typicode.com/users/" + userId;
 
         if (cond) {
+            const controller = new AbortController();
             axios.get(url).then((response) => {
                 const userData = response.data;
                 let userName = userData.username;
@@ -32,6 +33,9 @@ function Home() {
             }).catch((error) => {
                 alert("로그인에 실패했습니다.");
             });
+            return () => {
+                controller.abort();
+            }
         }
         else {
             setResTxt("User ID는 1~10번만 가능합니다.");
