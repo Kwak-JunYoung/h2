@@ -5,8 +5,6 @@ import { ItemType } from "./types/Type";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const itemData: ItemType[] = [
-    { userId: 2, id: 1, title: "title1" },
-    { userId: 2, id: 2, title: "title2" },
 ]
 
 function AlbumList() {
@@ -16,7 +14,7 @@ function AlbumList() {
     let navigate = useNavigate();
 
     const [items, setItems] = useState<ItemType[]>(itemData);
-    const [item, setItem] = useState<ItemType>(location.state);
+    const [item, setItem] = useState<ItemType>(location.state || {});
 
     useEffect(() => {
         const controller = new AbortController();
@@ -37,7 +35,7 @@ function AlbumList() {
     }
 
     const btnClick = () => {
-        setTimeout(() => { navigate(`/album/${item.id}`, { state: item }) }, 1000);  //페이지 이동 
+        setTimeout(() => { navigate(`/album/${item.id}`, { state: item }) }, 100);  //페이지 이동 
     }
 
     return (

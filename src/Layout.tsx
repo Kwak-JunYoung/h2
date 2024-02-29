@@ -9,7 +9,7 @@ function Layout() {
     let navigate = useNavigate();
 
     useEffect(() => {
-        if (storedState) {
+        if (storedState.isLogon) {
             context.dispatch({ type: "LOGON", value: storedState });
         }
     }, []);

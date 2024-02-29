@@ -5,11 +5,12 @@ import { ItemType, PhotoType } from "./types/Type";
 
 function PictureList() {
     const location = useLocation();
-    const albumId = location.state.id;
-    const userId = location.state.userId;
-    const albumTitle = location.state.title;
+    const locationState = location.state? location.state : {};
+    const albumId = locationState.id;
+    const userId = locationState.userId;
+    const albumTitle = locationState.title;
     const [thumbnails, setThumbnails] = useState<PhotoType[]>([]);
-    const [albumInfo, setAlbumInfo] = useState<ItemType>(location.state);
+    const [albumInfo, setAlbumInfo] = useState<ItemType>(locationState);
 
     const navigate = useNavigate();
 
