@@ -7,16 +7,18 @@ function PictureList() {
     const location = useLocation();
     const albumId = location.state.id;
     const userId = location.state.userId;
+    const albumTitle = location.state.title;
     const [thumbnails, setThumbnails] = useState<PhotoType[]>([]);
-    const [albumTitle, setAlbumTitle] = useState<string>('');
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const controller = new AbortController(); //객체가 여기서 만들어져야 한다 
+        const baseUrl = "https://jsonplaceholder.typicode.com/photos";
+        const qryStr = `?albumId=${albumId}`;
+        const finUrl = baseUrl + qryStr;
 
-        axios.get(`https://jsonplaceholder.typicode.com//photos?albumId=${albumId}`).then((response) => {
-            setAlbumTitle(location.state.title);
+        axios.get(finUrl).then((response) => {
             setThumbnails(response.data);
         }
         ).catch((error) => {
