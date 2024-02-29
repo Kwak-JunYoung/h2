@@ -21,7 +21,7 @@ function Home() {
         // 위 문구를 아래 condition이 match하지 않으면 출력
         const cond = parseInt(userId) >= 1 && parseInt(userId) <= 10;
         let url = "https://jsonplaceholder.typicode.com/users/" + userId;
-        console.log(url)
+        
         if (cond) {
             axios.get(url).then((response) => {
                 const userData = response.data;

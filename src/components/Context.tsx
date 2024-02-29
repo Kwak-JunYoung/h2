@@ -1,13 +1,13 @@
 import { Dispatch, createContext, useEffect, useReducer } from "react";
 import { LogonAction, StateType } from "./types/Type";
 import axios from "axios";
+import { get } from "http";
 
 const initalState: StateType = { userid: "", username: "", isLogon: false };
 
 //Reducer 따로 생성 
 // 리듀서 함수는 액션에 따라 상태를 업데이트하는 역할을 합니다.
 function LogInReducer(state: StateType, action: LogonAction): StateType {
-
     switch (action.type) {
         case "LOGON":
             {
@@ -22,7 +22,7 @@ function LogInReducer(state: StateType, action: LogonAction): StateType {
             return logOutState
 
         case "RESET":
-            return initalState;
+            return getStateFromLocalStorage("appState");
 
         default:
             throw new Error("알수없는 액션입니다.");
@@ -65,4 +65,4 @@ const getStateFromLocalStorage = (key: string) => {
 }
 
 
-export { AppContext, AppProvider, saveStateToLocalStorage, getStateFromLocalStorage};
+export { AppContext, AppProvider, saveStateToLocalStorage, getStateFromLocalStorage };

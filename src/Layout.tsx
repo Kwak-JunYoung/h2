@@ -1,31 +1,33 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { AppContext } from "./components/Context";
+import { AppContext, saveStateToLocalStorage, getStateFromLocalStorage } from "./components/Context";
 
 function Layout() {
     // 새로고침하면 로그인 정보가 사라지는 문제 해결
     let context = useContext(AppContext);
-
+    const storedState = getStateFromLocalStorage("appState");
     let navigate = useNavigate();
 
     useEffect(() => {
-        console.log(context);
-    }, [context]); // 상태 변경 시마다 useEffect 실행
+        if (storedState) {
+            context.dispatch({ type: "LOGON", value: storedState });
+        }
+    }, []);
 
     const logOut = () => {
         context.dispatch({ type: "LOGOUT", value: { userid: "", username: "", isLogon: false } });
-        navigate("/");
+        saveStateToLocalStorage("appState", { userid: "", username: "", isLogon: false });
+        navigate("/", {});
     }
 
-    console.log(context.state);
     return (
         <div>
-            <h1 style={{"display": "inline"}}>Hanaro Album</h1>
+            <h1 style={{ "display": "inline" }}>Hanaro Album</h1>
             {
-                context.state.isLogon ? <p>{context.state.userid} {context.state.username}</p> : <p>Login Please</p>
+                <p>{context.state.userid} {context.state.username}</p>
             }
             <button onClick={logOut}>Logout</button>
-            <Outlet/>
+            <Outlet />
         </div>
     );
 }

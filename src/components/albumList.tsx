@@ -41,7 +41,6 @@ function AlbumList() {
     }, []);
 
     const itemClick = (item: ItemType) => {
-        console.log(item);
         // 새로운 컴포넌트 만들어서 그쪽으로 이동?
         setItem(item); // ...item으로 한다?
         // navigate ("라우터에서 정한 url", {selected item})
