@@ -16,15 +16,13 @@ function AlbumList() {
     let navigate = useNavigate();
 
     const [items, setItems] = useState<ItemType[]>(itemData);
-    const [item, setItem] = useState<ItemType>(itemData[0]);
-
-    let uId = location.state;
+    const [item, setItem] = useState<ItemType>(location.state);
 
     useEffect(() => {
         const controller = new AbortController();
 
         axios.get(baseUrl, { signal: controller.signal }).then((response) => {
-            const filtered = response.data.filter((item: ItemType) => item.userId == uId);
+            const filtered = response.data.filter((i: ItemType) => i.userId == location.state.userId);
             setItems([...filtered]);
         }).catch((error) => {
             console.log(error);
@@ -32,7 +30,7 @@ function AlbumList() {
         return () => {
             controller.abort();
         }
-    }, [uId]);
+    }, []);
 
     const itemClick = (item: ItemType) => {
         setItem(item);

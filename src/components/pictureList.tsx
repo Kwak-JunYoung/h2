@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { PhotoType } from "./types/Type";
+import { ItemType, PhotoType } from "./types/Type";
 
 function PictureList() {
     const location = useLocation();
@@ -9,6 +9,7 @@ function PictureList() {
     const userId = location.state.userId;
     const albumTitle = location.state.title;
     const [thumbnails, setThumbnails] = useState<PhotoType[]>([]);
+    const [albumInfo, setAlbumInfo] = useState<ItemType>(location.state);
 
     const navigate = useNavigate();
 
@@ -42,7 +43,7 @@ function PictureList() {
                     })
                 }
             </ul>
-            <button onClick={() => { navigate("/album", { state: userId }) }} className="btn btn-primary">뒤로</button>
+            <button onClick={() => { navigate("/album", { state: albumInfo }) }} className="btn btn-primary">뒤로</button>
         </div>
     )
 }

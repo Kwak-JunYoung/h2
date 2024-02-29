@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AppContext } from './Context';
+import { ItemType } from './types/Type';
 
 function Home() {
 
@@ -28,8 +29,8 @@ function Home() {
                 let userName = userData.username;
 
                 context.dispatch({ type: "LOGON", value: { userid: userId, username: userName, isLogon: true } });
-
-                setTimeout(() => { navigate("/album", { state: userId }) }, 1000);  //페이지 이동 
+                let albumState: ItemType = { userId: parseInt(userId), id: -1, title: "" };
+                setTimeout(() => { navigate("/album", { state: albumState }) }, 1000);  //페이지 이동 
             }).catch((error) => {
                 alert("로그인에 실패했습니다.");
             });
