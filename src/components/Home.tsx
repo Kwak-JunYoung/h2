@@ -43,9 +43,15 @@ function Home() {
         }
     }
 
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            logIn();
+        }
+    }
+
     return (
         <div>
-            <input type="text" name="userId" id="userId" onChange={onChange} value={userId} placeholder="User ID..." />
+            <input type="text" name="userId" id="userId" onChange={onChange} value={userId} placeholder="User ID..." onKeyDown={handleKeyPress} />
             <button type="button" onClick={logIn} className='greenBtn'>Sign In</button>
             <div id="resultText" style={{ "color": "red" }}>{resTxt}</div>
         </div>
