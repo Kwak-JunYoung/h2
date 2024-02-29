@@ -1,8 +1,7 @@
-import { useLocation, useParams, useSearchParams, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { PhotoType } from "./types/Type";
-import { AppContext, getStateFromLocalStorage } from "./Context";
 
 function PictureList() {
     const location = useLocation();
@@ -10,14 +9,11 @@ function PictureList() {
     const [thumbnails, setThumbnails] = useState<PhotoType[]>([]);
     const [albumTitle, setAlbumTitle] = useState<string>('');
 
-    let context = useContext(AppContext); 
-    
     const navigate = useNavigate();
-    // navigate("/album", { state: userId }
+
     useEffect(() => {
         const controller = new AbortController(); //객체가 여기서 만들어져야 한다 
 
-        context.state = getStateFromLocalStorage("appState");//로그온한 아이디가져오고 다른 정보 불러온다 
         axios.get(`https://jsonplaceholder.typicode.com//photos?albumId=${albumId}`).then((response) => {
             setAlbumTitle(location.state.title);
             setThumbnails(response.data);
@@ -27,8 +23,8 @@ function PictureList() {
         })
         return () => {
             console.log("마지막 정리작업을 하고 나간다 ");
-            controller.abort(); //메모리 누스 해제, 백그라운드에서 작동중인 
-            //axios등을 멈추게 할 수 있다  
+            controller.abort();
+            // Deactivate axios for memory efficiency
         }
     }, []);
 
@@ -43,7 +39,7 @@ function PictureList() {
                     })
                 }
             </ul>
-            <button onClick={() => { navigate("/album",  { state: location.state.userId }) }}>돌아가기</button>
+            <button onClick={() => { navigate("/album", { state: location.state.userId }) }}>돌아가기</button>
         </div>
     )
 }
